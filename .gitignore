@@ -1,0 +1,32 @@
+# Dependencies & web build
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# OS & editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Android / Gradle build & local SDK config
+android/.gradle/
+android/build/
+android/app/build/
+android/capacitor-cordova-android-plugins/build/
+android/local.properties
+*.keystore
+*.jks
+
+# Compiled APKs (distributed via GitHub Releases)
+*.apk
+*.aab
+
+# Logs & temporary verification artifacts
+*.log
+npm-debug.log*
+verify_*.py
+*.png
+!public/**/*.png
+!android/**/res/**/*.png
