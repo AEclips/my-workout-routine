@@ -1,4 +1,4 @@
-import { Minus, Pause, Play, Plus, Timer, X } from 'lucide-react';
+import { Pause, Play, Plus, Timer } from 'lucide-react';
 
 interface RestTimerBarProps {
   remainingSeconds: number;
@@ -27,45 +27,37 @@ export function RestTimerBar({
   const pct = totalSeconds > 0 ? Math.max(0, Math.min(100, (remainingSeconds / totalSeconds) * 100)) : 0;
 
   return (
-    <div className={`rest-timer-dock ${isCompletedAlert ? 'timer-done' : ''}`}>
-      <div className="rt-progress-track">
-        <div className="rt-progress-fill" style={{ width: `${pct}%` }} />
+    <div className={`rest-dock ${isCompletedAlert ? 'done' : ''}`}>
+      <div className="rd-track">
+        <div className="rd-fill" style={{ width: `${pct}%` }} />
       </div>
-      <div className="rt-content">
-        <div className="rt-left">
-          <div className="rt-icon-box">
-            <Timer size={18} />
+      <div className="rd-row">
+        <div className="rd-info">
+          <div className="rd-icon">
+            <Timer size={16} />
           </div>
-          <div>
-            <div className="rt-label">
-              {isCompletedAlert ? 'বিশ্রাম শেষ! পরের সেট শুরু করুন' : `Rest Timer • ${exerciseName}`}
+          <div className="rd-text">
+            <div className="rd-clock">{isCompletedAlert ? '00:00' : timeStr}</div>
+            <div className="rd-sub">
+              {isCompletedAlert ? 'বিশ্রাম শেষ • পরের সেট' : `Rest • ${exerciseName}`}
             </div>
-            <div className="rt-time">{isCompletedAlert ? '00:00 • READY!' : timeStr}</div>
           </div>
         </div>
 
-        <div className="rt-actions">
+        <div className="rd-actions">
           {!isCompletedAlert && (
             <>
               <button
                 type="button"
-                className="rt-btn"
-                onClick={() => onAdjust(-15)}
-                title="-15s"
-              >
-                <Minus size={14} /> 15s
-              </button>
-              <button
-                type="button"
-                className="rt-btn"
+                className="rd-btn"
                 onClick={() => onAdjust(15)}
-                title="+15s"
+                aria-label="Add 15 seconds"
               >
                 <Plus size={14} /> 15s
               </button>
               <button
                 type="button"
-                className="rt-btn rt-btn-primary"
+                className="rd-btn icon"
                 onClick={onTogglePause}
                 aria-label={isRunning ? 'Pause timer' : 'Resume timer'}
               >
@@ -75,11 +67,10 @@ export function RestTimerBar({
           )}
           <button
             type="button"
-            className="rt-btn rt-btn-close"
+            className="rd-btn skip"
             onClick={onSkip}
-            aria-label="Close timer"
           >
-            <X size={15} /> {isCompletedAlert ? 'ওকে' : 'Skip'}
+            {isCompletedAlert ? 'ওকে' : 'Skip'}
           </button>
         </div>
       </div>
